@@ -67,6 +67,8 @@ var (
 			"ufs":      {"syz_mount_image$ufs"},
 			"usb": {
 				"syz_usb_connect",
+				"syz_usb_connect$uvc",
+				"syz_usb_connect$hid_multitouch",
 				"syz_usb_connect$hid",
 				"syz_usb_connect$printer",
 				"syz_usb_connect$cdc_ecm",

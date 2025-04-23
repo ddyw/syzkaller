@@ -416,7 +416,7 @@ usb_generic_descriptor {
 	data		array[int8, 0:256]
 } [packed]
 
-usb_descriptor_types = USB_DT_DEVICE, USB_DT_CONFIG, USB_DT_STRING, USB_DT_INTERFACE, USB_DT_ENDPOINT, USB_DT_DEVICE_QUALIFIER, USB_DT_OTHER_SPEED_CONFIG, USB_DT_INTERFACE_POWER, USB_DT_OTG, USB_DT_DEBUG, USB_DT_INTERFACE_ASSOCIATION, USB_DT_SECURITY, USB_DT_KEY, USB_DT_ENCRYPTION_TYPE, USB_DT_BOS, USB_DT_DEVICE_CAPABILITY, USB_DT_WIRELESS_ENDPOINT_COMP, USB_DT_WIRE_ADAPTER, USB_DT_RPIPE, USB_DT_CS_RADIO_CONTROL, USB_DT_PIPE_USAGE, USB_DT_SS_ENDPOINT_COMP, USB_DT_SSP_ISOC_ENDPOINT_COMP, HID_DT_HID, HID_DT_REPORT, HID_DT_PHYSICAL
+usb_descriptor_types = USB_DT_DEVICE, USB_DT_CONFIG, USB_DT_STRING, USB_DT_INTERFACE, USB_DT_ENDPOINT, USB_DT_DEVICE_QUALIFIER, USB_DT_OTHER_SPEED_CONFIG, USB_DT_INTERFACE_POWER, USB_DT_OTG, USB_DT_DEBUG, USB_DT_INTERFACE_ASSOCIATION, USB_DT_SECURITY, USB_DT_KEY, USB_DT_ENCRYPTION_TYPE, USB_DT_BOS, USB_DT_DEVICE_CAPABILITY, USB_DT_WIRELESS_ENDPOINT_COMP, USB_DT_WIRE_ADAPTER, USB_DT_RPIPE, USB_DT_CS_RADIO_CONTROL, USB_DT_PIPE_USAGE, USB_DT_SS_ENDPOINT_COMP, USB_DT_SSP_ISOC_ENDPOINT_COMP, HID_DT_HID, HID_DT_REPORT, HID_DT_PHYSICAL, USB_DT_CS_INTERFACE
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -1225,7 +1225,7 @@ uac1_as_header_descriptor {
 	wFormatTag		flags[uac_format_types, int16]
 } [packed]
 
-uac_format_types = UAC_FORMAT_TYPE_I_UNDEFINED, UAC_FORMAT_TYPE_I_PCM, UAC_FORMAT_TYPE_I_PCM8, UAC_FORMAT_TYPE_I_IEEE_FLOAT, UAC_FORMAT_TYPE_I_ALAW, UAC_FORMAT_TYPE_I_MULAW, UAC_FORMAT_TYPE_II_MPEG, UAC_FORMAT_TYPE_II_AC3
+uac_format_types = UAC_FORMAT_TYPE_I_UNDEFINED, UAC_FORMAT_TYPE_I_PCM, UAC_FORMAT_TYPE_I_PCM8, UAC_FORMAT_TYPE_I_IEEE_FLOAT, UAC_FORMAT_TYPE_I_ALAW, UAC_FORMAT_TYPE_I_MULAW, UAC_FORMAT_TYPE_II_MPEG, UAC_FORMAT_TYPE_II_AC3, USB_DT_CS_INTERFACE
 
 uac_format_type_i_continuous_descriptor {
 	bLength			len[parent, int8]
@@ -1438,3 +1438,59 @@ htc_frame_flags = HTC_FLAGS_RECV_TRAILER
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# By DDYW
+
+# UVC driver specific descriptions.
+
+include <uapi/linux/usb/video.h>
+
+# resource fd_usb_uvc[fd_usb]
+
+syz_usb_connect$uvc(speed flags[usb_device_speed], dev_len len[dev], dev ptr[in, usb_device_descriptor_uvc], conn_descs ptr[in, vusb_connect_descriptors]) fd_usb (timeout[1], prog_timeout[1], remote_cover)
+
+usb_device_descriptor_uvc {
+	inner	usb_device_descriptor_t[0, 0, 0, 0x408, 0x4033, 0, array[usb_config_descriptor_uvc, 1]]
+} [packed]
+
+usb_config_descriptor_uvc {
+	inner	usb_config_descriptor_verbose_t[const[1, int8], const[2, int8], const[3, int8], flags[usb_config_attributes, int8], const[0x32, int8], usb_interface_descriptors_uvc]
+} [packed]
+
+type usb_endpoint_descriptor_noaudio_verbose_t[ADDR, ATTRS, PACKET, INTERVAL] {
+	bLength			const[USB_DT_ENDPOINT_SIZE, int8]
+	bDescriptorType		const[USB_DT_ENDPOINT, int8]
+
+	bEndpointAddress	ADDR
+	bmAttributes		ATTRS
+	wMaxPacketSize		PACKET
+	bInterval		INTERVAL
+} [packed]
+
+usb_interface_descriptors_uvc {
+	interface0	usb_interface_descriptor_verbose_t[const[0, int8], const[0, int8], const[1, int8], const[USB_CLASS_VIDEO, int8], const[1, int8], const[1, int8], const[4, int8], array[usb_extra_descriptor_uvc[const[uvc_extra_type, int8]], 1:5], void]
+	interface1	usb_interface_descriptor_verbose_t[const[1, int8], const[0, int8], const[1, int8], const[USB_CLASS_VIDEO, int8], const[2, int8], const[0, int8], const[4, int8], array[usb_extra_descriptor_uvc[flags[uvc_extra_type, int8]], 1:5], void]
+	usb_endpoint	usb_endpoint_descriptor_noaudio_verbose_t[flags[usb_endpoint_addresses, int8], const[USB_ENDPOINT_XFER_INT, int8], const[8, int16], const[5, int8]]
+} [packed]
+
+type usb_extra_descriptor_uvc[BFLAG] {
+	bLength		len[parent, int8]
+	bDescriptorType	const[USB_DT_CS_INTERFACE, int8]
+	bFlag		BFLAG
+	data		array[int8, 6:256]
+# data		extra_body
+} [packed]
+# extra_body [
+
+# ]
+# [varlen]
+
+uvc_extra_type = 0, UVC_VS_OUTPUT_HEADER, UVC_VS_FORMAT_DV, UVC_VS_FORMAT_UNCOMPRESSED, UVC_VS_FORMAT_FRAME_BASED, UVC_VS_FORMAT_MJPEG
+
+# hid_multitouch
+syz_usb_connect$hid_multitouch(speed flags[usb_device_speed], dev_len len[dev], dev ptr[in, usb_device_descriptor_hid_multitouch], conn_descs ptr[in, vusb_connect_descriptors]) fd_usb_hid (timeout[3000], prog_timeout[3000], remote_cover)
+
+# use Anton touch pad ID
+usb_device_descriptor_hid_multitouch {
+	inner	usb_device_descriptor_t[0, 0, 0, 0x18d1, 0x5028, 64, array[usb_config_descriptor_hid, 1]]
+} [packed]

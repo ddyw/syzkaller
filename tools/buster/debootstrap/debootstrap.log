@@ -1,0 +1,22 @@
+2025-03-25 20:07:13 URL:http://deb.debian.org/debian/dists/buster/InRelease [121573/121573] -> "/home/ddyw/KernelHack/Syzkaller/syzkaller/tools/buster/var/lib/apt/lists/partial/deb.debian.org_debian_dists_buster_InRelease" [1]
+gpgv: Signature made Sat 10 Jun 2023 04:54:52 PM CST
+gpgv:                using RSA key 0146DC6D4A0B2914BDED34DB648ACFD622F3D138
+gpgv: Good signature from "Debian Archive Automatic Signing Key (10/buster) <ftpmaster@debian.org>"
+gpgv: Signature made Sat 10 Jun 2023 04:54:52 PM CST
+gpgv:                using RSA key A7236886F3CCCAAD148A27F80E98404D386FA1D9
+gpgv: Can't check signature: No public key
+gpgv: Signature made Sat 10 Jun 2023 05:31:22 PM CST
+gpgv:                using RSA key 6D33866EDD8FFA41C0143AEDDCC9EFBF77E11517
+gpgv:                issuer "debian-release@lists.debian.org"
+gpgv: Good signature from "Debian Stable Release Key (10/buster) <debian-release@lists.debian.org>"
+2025-03-25 20:07:37 URL:https://archive.debian.org/debian-archive/debian/dists/buster/InRelease [121573/121573] -> "/home/ddyw/KernelHack/Syzkaller/syzkaller/tools/buster/var/lib/apt/lists/partial/archive.debian.org_debian-archive_debian_dists_buster_InRelease" [1]
+gpgv: Signature made Sat 10 Jun 2023 04:54:52 PM CST
+gpgv:                using RSA key 0146DC6D4A0B2914BDED34DB648ACFD622F3D138
+gpgv: Can't check signature: No public key
+gpgv: Signature made Sat 10 Jun 2023 04:54:52 PM CST
+gpgv:                using RSA key A7236886F3CCCAAD148A27F80E98404D386FA1D9
+gpgv: Can't check signature: No public key
+gpgv: Signature made Sat 10 Jun 2023 05:31:22 PM CST
+gpgv:                using RSA key 6D33866EDD8FFA41C0143AEDDCC9EFBF77E11517
+gpgv:                issuer "debian-release@lists.debian.org"
+gpgv: Can't check signature: No public key

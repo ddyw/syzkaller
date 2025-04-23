@@ -4598,7 +4598,7 @@ func subsystems_linux() []*Subsystem {
 
 	usb = Subsystem{
 		Name:     "usb",
-		Syscalls: []string{"syz_usb_connect", "syz_usb_connect$hid", "syz_usb_connect$printer", "syz_usb_connect$cdc_ecm", "syz_usb_connect$cdc_ncm", "syz_usb_connect$uac1"},
+		Syscalls: []string{"syz_usb_connect", "syz_usb_connect$uvc", "syz_usb_connect$hid_multitouch", "syz_usb_connect$hid", "syz_usb_connect$printer", "syz_usb_connect$cdc_ecm", "syz_usb_connect$cdc_ncm", "syz_usb_connect$uac1"},
 		Lists:    []string{"linux-usb@vger.kernel.org"},
 		Parents:  []*Subsystem{&kernel},
 		PathRules: []PathRule{

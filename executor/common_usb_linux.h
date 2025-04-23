@@ -396,7 +396,8 @@ static volatile long syz_usb_connect_impl(uint64 speed, uint64 dev_len, const ch
 		}
 	}
 
-	sleep_ms(200);
+	// sleep_ms(200);
+	sleep_ms(50);
 
 	debug("syz_usb_connect: configured\n");
 
@@ -515,7 +516,8 @@ static volatile long syz_usb_control_io(volatile long a0, volatile long a1, vola
 		return rv;
 	}
 
-	sleep_ms(200);
+	// sleep_ms(200);
+	sleep_ms(50);
 
 	return 0;
 }
@@ -550,7 +552,8 @@ static volatile long syz_usb_ep_write(volatile long a0, volatile long a1, volati
 		return rv;
 	}
 
-	sleep_ms(200);
+	// sleep_ms(200);
+	sleep_ms(50);
 
 	return 0;
 }
@@ -589,8 +592,8 @@ static volatile long syz_usb_ep_read(volatile long a0, volatile long a1, volatil
 	debug("syz_usb_ep_read: received data:\n");
 	debug_dump_data(&io_data.data[0], io_data.inner.length);
 
-	sleep_ms(200);
-
+	// sleep_ms(200);
+	sleep_ms(50);
 	return 0;
 }
 #endif // SYZ_EXECUTOR || __NR_syz_usb_ep_read
@@ -602,8 +605,8 @@ static volatile long syz_usb_disconnect(volatile long a0)
 
 	int rv = close(fd);
 
-	sleep_ms(200);
-
+	// sleep_ms(200);
+	sleep_ms(50);
 	return rv;
 }
 #endif // SYZ_EXECUTOR || __NR_syz_usb_disconnect

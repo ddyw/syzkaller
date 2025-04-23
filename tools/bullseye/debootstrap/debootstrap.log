@@ -1,0 +1,14 @@
+2025-03-25 19:47:16 URL:http://deb.debian.org/debian/dists/bullseye/InRelease [115940/115940] -> "/home/ddyw/KernelHack/Syzkaller/syzkaller/tools/bullseye/var/lib/apt/lists/partial/deb.debian.org_debian_dists_bullseye_InRelease" [1]
+gpgv: Signature made Sat 31 Aug 2024 07:02:57 PM CST
+gpgv:                using RSA key A7236886F3CCCAAD148A27F80E98404D386FA1D9
+gpgv: Can't check signature: No public key
+gpgv: Signature made Sat 31 Aug 2024 07:02:58 PM CST
+gpgv:                using RSA key 4CB50190207B4758A3F73A796ED0E7B82643E131
+gpgv: Can't check signature: No public key
+gpgv: Signature made Sat 31 Aug 2024 07:13:55 PM CST
+gpgv:                using RSA key A4285295FC7B1A81600062A9605C66F00D6C9793
+gpgv: Can't check signature: No public key
+https://archive.debian.org/debian-archive/debian/dists/bullseye/InRelease:
+2025-03-25 19:47:21 ERROR 404: Not Found.
+https://archive.debian.org/debian-archive/debian/dists/bullseye/Release:
+2025-03-25 19:48:28 ERROR 404: Not Found.
