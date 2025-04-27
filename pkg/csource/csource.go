@@ -624,7 +624,11 @@ func (ctx *context) postProcess(result []byte) []byte {
 	// TODO: Figure out what would be the right replacement for doexit_thread().
 	result = bytes.Replace(result, []byte("doexit_thread("), []byte("exit("), -1)
 	result = regexp.MustCompile(`PRINTF\(.*?\)`).ReplaceAll(result, nil)
-	result = regexp.MustCompile(`\t*debug\((.*\n)*?.*\);\n`).ReplaceAll(result, nil)
+	if ctx.opts.Debug {
+		result = regexp.MustCompile(`(\t*)debug(\((.*\n)*?.*\);\n)`).ReplaceAll(result, []byte("${1}printf${2}"))
+	} else {
+		result = regexp.MustCompile(`\t*debug\((.*\n)*?.*\);\n`).ReplaceAll(result, nil)
+	}
 	result = regexp.MustCompile(`\t*debug_dump_data\((.*\n)*?.*\);\n`).ReplaceAll(result, nil)
 	result = regexp.MustCompile(`\t*exitf\((.*\n)*?.*\);\n`).ReplaceAll(result, []byte("\texit(1);\n"))
 	result = regexp.MustCompile(`\t*fail(msg)?\((.*\n)*?.*\);\n`).ReplaceAll(result, []byte("\texit(1);\n"))

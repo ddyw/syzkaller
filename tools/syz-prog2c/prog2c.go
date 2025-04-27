@@ -33,6 +33,7 @@ var (
 	flagLeak       = flag.Bool("leak", false, "do leak checking")
 	flagEnable     = flag.String("enable", "none", "enable only listed additional features")
 	flagDisable    = flag.String("disable", "none", "enable all additional features except listed")
+	flagDebug      = flag.Bool("debug", false, "enable debug print")
 )
 
 func main() {
@@ -94,6 +95,7 @@ func main() {
 		Swap:          features["swap"].Enabled,
 		UseTmpDir:     *flagUseTmpDir,
 		HandleSegv:    *flagHandleSegv,
+		Debug:         *flagDebug,
 		Trace:         *flagTrace,
 	}
 	src, err := csource.Write(p, opts)

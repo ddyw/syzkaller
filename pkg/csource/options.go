@@ -48,8 +48,8 @@ type Options struct {
 
 	UseTmpDir  bool `json:"tmpdir,omitempty"`
 	HandleSegv bool `json:"segv,omitempty"`
-
-	Trace bool `json:"trace,omitempty"`
+	Debug      bool `json:"debug,omitempty"`
+	Trace      bool `json:"trace,omitempty"`
 	LegacyOptions
 }
 
